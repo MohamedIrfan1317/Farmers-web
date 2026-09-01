@@ -1,0 +1,6 @@
+{
+  "name": "FarmerConnect – Direct Farmer-to-Customer Marketplace",
+  "description": "Simple, inclusive agricultural marketplace connecting farmers directly with grocery customers and approved bulk buyers, featuring strict product eligibility rules, cold storage tracking, paddy value addition, IVR simulation, and multilingual support in Tamil, English, and Hindi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
