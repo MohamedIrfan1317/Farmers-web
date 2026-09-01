@@ -558,22 +558,152 @@ const INITIAL_ORDERS: Order[] = [
       {
         status: 'FARMER_ACCEPTED',
         timestamp: '1:20 PM',
-        note: 'Farmer Muthusamy accepted the request',
+        note: 'Farmer Muthusamy confirmed order & price lock',
       },
       {
         status: 'PREPARING',
         timestamp: '2:00 PM',
-        note: 'Harvested fresh & packed in eco-crates',
+        note: 'Harvested fresh from Thondamuthur farm field & packed in eco-crates (Grade A)',
       },
       {
         status: 'PICKED_UP',
         timestamp: '3:15 PM',
-        note: 'Rural logistics eco-van picked up order',
+        note: 'Rural logistics eco-van (TN-38-AF-2024) picked up produce with temperature seal',
       },
       {
         status: 'IN_TRANSIT',
         timestamp: '3:30 PM',
-        note: 'On route via Thondamuthur - RS Puram Road',
+        note: 'On route via Thondamuthur - RS Puram Road corridor (ETA: 25 mins)',
+      },
+    ],
+  },
+  {
+    id: 'ORD-2026-9041',
+    buyerId: 'grocery_01',
+    buyerName: 'Kavitha Senthil',
+    buyerPhone: '9443322110',
+    buyerRole: 'GROCERY',
+    buyerLocation: 'RS Puram, Coimbatore (3.5 km)',
+    farmerId: 'farmer_02',
+    farmerName: 'Ramasamy K',
+    farmerPhone: '9842233445',
+    farmerLocation: 'Kinathukadavu, Coimbatore',
+    items: [
+      {
+        productId: 'prod_02',
+        productName: 'Small Shallot Onions (சின்ன வெங்காயம்)',
+        category: 'VEGETABLE',
+        quantity: 5,
+        unit: 'kg',
+        unitPrice: 42,
+        totalPrice: 210,
+        farmerId: 'farmer_02',
+        farmerName: 'Ramasamy K',
+        farmerLocation: 'Kinathukadavu',
+        buyerEligibility: 'ALL',
+      },
+      {
+        productId: 'prod_05',
+        productName: 'Fresh Country Spinach (பசலைக் கீரை)',
+        category: 'VEGETABLE',
+        quantity: 4,
+        unit: 'piece',
+        unitPrice: 15,
+        totalPrice: 60,
+        farmerId: 'farmer_02',
+        farmerName: 'Ramasamy K',
+        farmerLocation: 'Kinathukadavu',
+        buyerEligibility: 'ALL',
+      },
+    ],
+    totalAmount: 270,
+    status: 'PREPARING',
+    deliveryType: 'DIRECT_DELIVERY',
+    distanceKm: 6.2,
+    estimatedDeliveryTime: 'Today by 5:45 PM',
+    createdAt: new Date(Date.now() - 3600 * 1000 * 1).toISOString(),
+    updatedAt: new Date(Date.now() - 1800 * 1000).toISOString(),
+    timeline: [
+      {
+        status: 'ORDER_PLACED',
+        timestamp: '3:10 PM',
+        note: 'Order placed by Grocery Buyer Kavitha',
+      },
+      {
+        status: 'FARMER_ACCEPTED',
+        timestamp: '3:14 PM',
+        note: 'Farmer Ramasamy accepted incoming request',
+      },
+      {
+        status: 'PREPARING',
+        timestamp: '3:45 PM',
+        note: 'Farmer harvested shallots & spinach fresh from plot #3; washing and sorting into crates',
+      },
+    ],
+  },
+  {
+    id: 'ORD-2026-7734',
+    buyerId: 'grocery_01',
+    buyerName: 'Kavitha Senthil',
+    buyerPhone: '9443322110',
+    buyerRole: 'GROCERY',
+    buyerLocation: 'RS Puram, Coimbatore (3.5 km)',
+    farmerId: 'farmer_01',
+    farmerName: 'Muthusamy Gounder',
+    farmerPhone: '9842156789',
+    farmerLocation: 'Thondamuthur, Coimbatore',
+    items: [
+      {
+        productId: 'prod_04',
+        productName: 'Traditional Raw Ponni Paddy (பச்சை நெல் மூட்டை)',
+        category: 'PADDY',
+        quantity: 2,
+        unit: 'bag',
+        unitPrice: 1250,
+        totalPrice: 2500,
+        farmerId: 'farmer_01',
+        farmerName: 'Muthusamy Gounder',
+        farmerLocation: 'Thondamuthur',
+        buyerEligibility: 'GROCERY_ONLY',
+      },
+    ],
+    totalAmount: 2500,
+    status: 'DELIVERED',
+    deliveryType: 'DIRECT_DELIVERY',
+    distanceKm: 3.5,
+    estimatedDeliveryTime: 'Delivered (Yesterday at 5:10 PM)',
+    createdAt: new Date(Date.now() - 3600 * 1000 * 28).toISOString(),
+    updatedAt: new Date(Date.now() - 3600 * 1000 * 24).toISOString(),
+    timeline: [
+      {
+        status: 'ORDER_PLACED',
+        timestamp: 'Yesterday 11:00 AM',
+        note: 'Paddy bags order placed by Kavitha',
+      },
+      {
+        status: 'FARMER_ACCEPTED',
+        timestamp: 'Yesterday 11:15 AM',
+        note: 'Farmer Muthusamy verified farm stock & moisture level',
+      },
+      {
+        status: 'PREPARING',
+        timestamp: 'Yesterday 12:30 PM',
+        note: 'Jute bags tagged with QR BATCH_COIMB_01 and quality inspected',
+      },
+      {
+        status: 'PICKED_UP',
+        timestamp: 'Yesterday 3:00 PM',
+        note: 'FPO logistics vehicle loaded with batch',
+      },
+      {
+        status: 'IN_TRANSIT',
+        timestamp: 'Yesterday 4:15 PM',
+        note: 'Arrived at delivery locality',
+      },
+      {
+        status: 'DELIVERED',
+        timestamp: 'Yesterday 5:10 PM',
+        note: 'Delivered to buyer doorstep. OTP verified & payment settled to farmer UPI.',
       },
     ],
   },
@@ -643,41 +773,126 @@ const INITIAL_NOTIFICATIONS: NotificationItem[] = [
     id: 'notif_01',
     userId: 'farmer_01',
     userRole: 'FARMER',
-    title: 'New Nearby Grocery Order!',
-    message: 'Kavitha (3.5 km away) ordered 10 kg Tomatoes & 25 kg Ponni Rice for ₹1,690.',
+    title: 'New Nearby Grocery Order Received!',
+    message: 'Kavitha (3.5 km away, RS Puram) ordered 5 kg Shallots & 4 pcs Country Spinach (₹270). Instant direct settlement locked.',
     type: 'ORDER',
     read: false,
-    createdAt: new Date(Date.now() - 3600 * 1000 * 3).toISOString(),
+    createdAt: new Date(Date.now() - 1000 * 60 * 15).toISOString(),
+    metadata: {
+      orderId: 'ORD-2026-9041',
+      buyerName: 'Kavitha Senthil',
+      status: 'PREPARING',
+      amount: 270,
+    },
   },
   {
     id: 'notif_02',
     userId: 'farmer_01',
     userRole: 'FARMER',
-    title: 'Bulk Buyer RFQ Match!',
-    message: 'Annapoorna Hospitality requires 500 kg Tomatoes at ₹20/kg in Coimbatore.',
-    type: 'BULK_RFQ',
+    title: 'Order Dispatched & In Transit',
+    message: 'Order #ORD-2026-9041 picked up by eco-delivery corridor vehicle. Live ETA: 5:45 PM (6.2 km).',
+    type: 'ORDER',
     read: false,
-    createdAt: new Date(Date.now() - 3600 * 1000 * 8).toISOString(),
+    createdAt: new Date(Date.now() - 1000 * 60 * 45).toISOString(),
+    metadata: {
+      orderId: 'ORD-2026-9041',
+      status: 'IN_TRANSIT',
+      eta: '5:45 PM',
+    },
   },
   {
     id: 'notif_03',
     userId: 'farmer_01',
     userRole: 'FARMER',
-    title: 'Stock Aging Alert',
-    message: '35 bags of Cavendish Banana in Solar Cold Room are entering day 5. Consider direct consumer offer.',
-    type: 'ALERT',
+    title: 'New Bulk RFQ: 500 kg Country Tomatoes',
+    message: 'Annapoorna Hospitality Group posted an urgent RFQ in Gandhipuram @ target price ₹20/kg for tomorrow morning delivery.',
+    type: 'BULK_RFQ',
     read: false,
-    createdAt: new Date(Date.now() - 3600 * 1000 * 12).toISOString(),
+    createdAt: new Date(Date.now() - 3600 * 1000 * 2).toISOString(),
+    metadata: {
+      rfqId: 'RFQ-2026-044',
+      buyer: 'Annapoorna Hospitality',
+      quantity: 500,
+      unit: 'kg',
+      targetPrice: 20,
+    },
   },
   {
     id: 'notif_04',
+    userId: 'farmer_01',
+    userRole: 'FARMER',
+    title: '⚠️ Perishable Stock Aging Alert (Day 5)',
+    message: '35 bags of Cavendish Bananas & 45 kg Country Tomatoes in Plot #2 are entering Day 5. Recommended 15% discount for local restaurants.',
+    type: 'ALERT',
+    read: false,
+    createdAt: new Date(Date.now() - 3600 * 1000 * 4).toISOString(),
+    metadata: {
+      productId: 'prod_01',
+      productName: 'Country Tomatoes',
+      daysAging: 5,
+      suggestedDiscount: 15,
+    },
+  },
+  {
+    id: 'notif_05',
+    userId: 'grocery_01',
+    userRole: 'GROCERY',
+    title: 'Order Status Update: In Transit 🚚',
+    message: 'Your order #ORD-2026-9041 from Farmer Ramasamy K has departed Kinathukadavu. ETA: Today by 5:45 PM.',
+    type: 'ORDER',
+    read: false,
+    createdAt: new Date(Date.now() - 1000 * 60 * 25).toISOString(),
+    metadata: {
+      orderId: 'ORD-2026-9041',
+      status: 'IN_TRANSIT',
+      batchId: 'BATCH_COIMB_01',
+    },
+  },
+  {
+    id: 'notif_06',
+    userId: 'grocery_01',
+    userRole: 'GROCERY',
+    title: 'Order #ORD-2026-7734 Delivered Fresh',
+    message: 'Traditional Raw Ponni Paddy (2 bags) successfully delivered to RS Puram with verified QR traceability.',
+    type: 'ORDER',
+    read: true,
+    createdAt: new Date(Date.now() - 3600 * 1000 * 24).toISOString(),
+    metadata: {
+      orderId: 'ORD-2026-7734',
+      status: 'DELIVERED',
+      batchId: 'BATCH_COIMB_01',
+    },
+  },
+  {
+    id: 'notif_07',
     userId: 'bulk_01',
     userRole: 'BULK',
-    title: 'Farmer Counter Offer Received',
-    message: 'Farmer Muthusamy Gounder offered 300 kg Tomatoes at ₹22/kg for your RFQ.',
+    title: 'Farmer Counter-Offer Submitted',
+    message: 'Farmer Muthusamy Gounder submitted counter-offer: 300 kg Tomatoes @ ₹22/kg for RFQ-2026-044.',
     type: 'BULK_RFQ',
     read: false,
-    createdAt: new Date(Date.now() - 3600 * 1000 * 5).toISOString(),
+    createdAt: new Date(Date.now() - 3600 * 1000 * 1).toISOString(),
+    metadata: {
+      rfqId: 'RFQ-2026-044',
+      farmerName: 'Muthusamy Gounder',
+      offeredPrice: 22,
+      offeredQty: 300,
+    },
+  },
+  {
+    id: 'notif_08',
+    userId: 'admin_01',
+    userRole: 'ADMIN',
+    title: 'Solar Cold Room #01 Capacity Alert',
+    message: 'Thondamuthur FPO Solar Cold Room is at 88% capacity (44/50 Metric Tons). 6 tons remaining.',
+    type: 'ALERT',
+    read: false,
+    createdAt: new Date(Date.now() - 3600 * 1000 * 6).toISOString(),
+    metadata: {
+      coldRoomId: 'CR_01',
+      occupiedTon: 44,
+      capacityTon: 50,
+    },
   },
 ];
 
@@ -1488,6 +1703,35 @@ class StorageService {
     this.saveToLocalStorage();
   }
 
+  public markNotificationAsUnread(id: string) {
+    this.notifications = this.notifications.map((n) => (n.id === id ? { ...n, read: false } : n));
+    this.saveToLocalStorage();
+  }
+
+  public markAllNotificationsAsRead(userId?: string) {
+    this.notifications = this.notifications.map((n) => {
+      if (!userId || n.userId === userId || n.userId === 'ALL') {
+        return { ...n, read: true };
+      }
+      return n;
+    });
+    this.saveToLocalStorage();
+  }
+
+  public deleteNotification(id: string) {
+    this.notifications = this.notifications.filter((n) => n.id !== id);
+    this.saveToLocalStorage();
+  }
+
+  public clearAllNotifications(userId?: string) {
+    if (!userId) {
+      this.notifications = [];
+    } else {
+      this.notifications = this.notifications.filter((n) => n.userId !== userId && n.userId !== 'ALL');
+    }
+    this.saveToLocalStorage();
+  }
+
   public addNotification(item: Omit<NotificationItem, 'id' | 'createdAt' | 'read'>) {
     const newNotif: NotificationItem = {
       ...item,
@@ -1497,6 +1741,71 @@ class StorageService {
     };
     this.notifications = [newNotif, ...this.notifications];
     this.saveToLocalStorage();
+    return newNotif;
+  }
+
+  // Activity Simulators
+  public simulateOrderUpdateNotification(orderId = 'ORD-2026-9041'): NotificationItem {
+    const statuses = ['IN_TRANSIT', 'PICKED_UP', 'PREPARING', 'DELIVERED'];
+    const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+    const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    
+    return this.addNotification({
+      userId: this.currentUser?.id || 'farmer_01',
+      userRole: this.currentUser?.role || 'FARMER',
+      title: `⚡ Live Dispatch: Order #${orderId} ${randomStatus.replace('_', ' ')}`,
+      message: `Order #${orderId} updated at ${timeStr}. Delivery corridor transit telemetry active. Verified QR batch attached.`,
+      type: 'ORDER',
+      metadata: {
+        orderId,
+        status: randomStatus,
+        batchId: 'BATCH_COIMB_01',
+      },
+    });
+  }
+
+  public simulateBulkRFQNotification(): NotificationItem {
+    const crops = [
+      { name: 'Grade A Country Tomatoes', qty: '800 kg', price: 21, buyer: 'Taj Gateway Coimbatore' },
+      { name: 'Milled Sona Masoori Rice', qty: '3,000 kg', price: 54, buyer: 'PSG College Central Kitchen' },
+      { name: 'Fresh Small Shallot Onions', qty: '400 kg', price: 44, buyer: 'Anand Bhavan Canteen' },
+    ];
+    const crop = crops[Math.floor(Math.random() * crops.length)];
+    const rfqId = `RFQ-2026-${Math.floor(100 + Math.random() * 900)}`;
+
+    return this.addNotification({
+      userId: this.currentUser?.id || 'farmer_01',
+      userRole: this.currentUser?.role || 'FARMER',
+      title: `🏢 New Commercial RFQ: ${crop.qty} ${crop.name}`,
+      message: `${crop.buyer} posted requirement @ target price ₹${crop.price}/kg. Tap to review specs and submit instant farmer offer.`,
+      type: 'BULK_RFQ',
+      metadata: {
+        rfqId,
+        buyer: crop.buyer,
+        productName: crop.name,
+      },
+    });
+  }
+
+  public simulateStockAlertNotification(): NotificationItem {
+    const alerts = [
+      { crop: 'Country Tomatoes (Plot #2)', days: 5, action: 'Recommended 15% discount for commercial kitchens.' },
+      { crop: 'Cavendish Bananas (Solar Cold Room #01)', days: 6, action: 'Reaching peak ripeness. Priority direct consumer dispatch advised.' },
+      { crop: 'Organic Country Spinach', days: 3, action: 'Perishable leaf stock alert. Move to immediate express delivery.' },
+    ];
+    const item = alerts[Math.floor(Math.random() * alerts.length)];
+
+    return this.addNotification({
+      userId: this.currentUser?.id || 'farmer_01',
+      userRole: this.currentUser?.role || 'FARMER',
+      title: `⚠️ Stock Aging Threshold Alert: ${item.crop}`,
+      message: `Stock has been stored for ${item.days} days. ${item.action}`,
+      type: 'ALERT',
+      metadata: {
+        crop: item.crop,
+        days: item.days,
+      },
+    });
   }
 
   // Price trends

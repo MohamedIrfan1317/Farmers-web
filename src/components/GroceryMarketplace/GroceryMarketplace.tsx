@@ -16,11 +16,17 @@ import {
   Truck,
   Check,
   Filter,
+  Navigation,
+  ExternalLink,
+  ChevronRight,
+  Sprout,
 } from 'lucide-react';
 import { ProductListing, Order, Language, UserProfile, ProductCategory } from '../../types';
 import { storageService } from '../../services/storageService';
 import { EligibilityService } from '../../services/eligibilityService';
 import { getTranslation } from '../../translations';
+import { OrderStatusTimeline } from './OrderStatusTimeline';
+import { OrderTrackingModal } from './OrderTrackingModal';
 
 interface GroceryMarketplaceProps {
   language: Language;
@@ -42,6 +48,11 @@ export const GroceryMarketplace: React.FC<GroceryMarketplaceProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
   const [activeTab, setActiveTab] = useState<'MARKET' | 'MY_ORDERS'>('MARKET');
+  const [orderFilter, setOrderFilter] = useState<'ALL' | 'ACTIVE' | 'DELIVERED'>('ALL');
+
+  // Tracking Modal State
+  const [selectedTrackingOrder, setSelectedTrackingOrder] = useState<Order | null>(null);
+  const [isTrackingModalOpen, setIsTrackingModalOpen] = useState(false);
 
   // Cart State
   const [cart, setCart] = useState<{ product: ProductListing; qty: number }[]>([]);
@@ -92,6 +103,23 @@ export const GroceryMarketplace: React.FC<GroceryMarketplaceProps> = ({
   const myGroceryOrders = orders.filter(
     (o) => o.buyerId === currentUser?.id || o.buyerRole === 'GROCERY'
   );
+
+  // Filtered orders for tab
+  const filteredOrders = myGroceryOrders.filter((ord) => {
+    if (orderFilter === 'ACTIVE') return ord.status !== 'DELIVERED' && ord.status !== 'CANCELLED';
+    if (orderFilter === 'DELIVERED') return ord.status === 'DELIVERED';
+    return true;
+  });
+
+  // Active in-flight order for quick tracker banner
+  const activeInTransitOrder = myGroceryOrders.find(
+    (o) => o.status === 'IN_TRANSIT' || o.status === 'PREPARING' || o.status === 'PICKED_UP'
+  );
+
+  const openOrderTracker = (order: Order) => {
+    setSelectedTrackingOrder(order);
+    setIsTrackingModalOpen(true);
+  };
 
   const addToCart = (product: ProductListing, qty = 1) => {
     const existing = cart.find((item) => item.product.id === product.id);
@@ -277,6 +305,47 @@ export const GroceryMarketplace: React.FC<GroceryMarketplaceProps> = ({
         </div>
       )}
 
+      {/* Active In-Transit Order Notification Strip */}
+      {activeInTransitOrder && activeTab === 'MARKET' && (
+        <div className="bg-[#FDF2ED] border border-[#F2C0B0] rounded-3xl p-4 sm:p-5 shadow-xs flex flex-wrap items-center justify-between gap-3 animate-in slide-in-from-top duration-200">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl bg-[#D97757] text-white flex items-center justify-center shrink-0 shadow-xs">
+              <Truck className="w-5 h-5 animate-pulse" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-black text-[#D97757] uppercase tracking-wide">
+                  {language === 'ta'
+                    ? 'செயலில் உள்ள நேரடி ஆர்டர் பயணம்'
+                    : language === 'hi'
+                    ? 'लाइव ऑर्डर डिलीवरी यात्रा'
+                    : 'Live Active Order in Progress'}
+                </span>
+                <span className="font-mono text-xs font-bold text-[#2D3129] bg-white px-2 py-0.5 rounded-md border border-[#F2C0B0]">
+                  #{activeInTransitOrder.id}
+                </span>
+              </div>
+              <p className="text-xs text-[#2D3129] mt-0.5">
+                {activeInTransitOrder.items.map((i) => i.productName).join(', ')} •{' '}
+                <strong className="text-[#4A6741]">ETA: {activeInTransitOrder.estimatedDeliveryTime}</strong>
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => {
+                setActiveTab('MY_ORDERS');
+              }}
+              className="px-4 py-2 bg-[#D97757] hover:bg-[#C26243] text-white text-xs font-bold rounded-2xl shadow-xs transition-colors flex items-center gap-1.5"
+            >
+              <span>{t.trackOrderTimeline || 'Track Live Lifecycle'}</span>
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Main View Area */}
       {activeTab === 'MARKET' ? (
         <div>
@@ -387,16 +456,55 @@ export const GroceryMarketplace: React.FC<GroceryMarketplaceProps> = ({
           )}
         </div>
       ) : (
-        /* My Grocery Orders Tab */
-        <div className="space-y-4">
-          <h3 className="text-lg font-bold text-[#2D3129]">
-            {t.tabMyOrders} ({myGroceryOrders.length})
-          </h3>
+        /* My Grocery Orders Tab with Visual Timeline */
+        <div className="space-y-6">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h3 className="text-xl font-bold text-[#2D3129] flex items-center gap-2">
+                <span>{t.tabMyOrders}</span>
+                <span className="text-xs bg-[#E6F0E4] text-[#4A6741] font-mono px-2.5 py-0.5 rounded-full font-bold">
+                  {myGroceryOrders.length}
+                </span>
+              </h3>
+              <p className="text-xs text-[#827D6B]">
+                {language === 'ta'
+                  ? 'விவசாயி அறுவடை முதல் உங்கள் வீடு வரை நேரடி கண்காணிப்பு'
+                  : language === 'hi'
+                  ? 'खेत की कटाई से लेकर आपके पते तक लाइव ऑर्डर स्थिति'
+                  : 'Track your order lifecycle from farmer harvest to doorstep delivery'}
+              </p>
+            </div>
 
-          {myGroceryOrders.length === 0 ? (
+            {/* Filter Pills */}
+            <div className="flex items-center gap-1.5 bg-[#F2EFE6] p-1 rounded-2xl border border-[#E6E2D3]">
+              {[
+                { id: 'ALL', label: 'All Orders' },
+                { id: 'ACTIVE', label: 'In-Progress / Transit' },
+                { id: 'DELIVERED', label: 'Delivered' },
+              ].map((filter) => (
+                <button
+                  key={filter.id}
+                  onClick={() => setOrderFilter(filter.id as any)}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                    orderFilter === filter.id
+                      ? 'bg-white text-[#2D3129] shadow-xs'
+                      : 'text-[#827D6B] hover:text-[#2D3129]'
+                  }`}
+                >
+                  {filter.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {filteredOrders.length === 0 ? (
             <div className="text-center py-16 bg-white rounded-3xl border border-[#E6E2D3] shadow-xs">
               <ShoppingBag className="w-12 h-12 text-[#827D6B] mx-auto mb-2" />
-              <p className="text-sm font-bold text-[#2D3129]">No orders placed yet.</p>
+              <p className="text-sm font-bold text-[#2D3129]">
+                {orderFilter === 'ALL'
+                  ? 'No orders placed yet.'
+                  : `No ${orderFilter.toLowerCase()} orders found.`}
+              </p>
               <button
                 onClick={() => setActiveTab('MARKET')}
                 className="mt-3 px-4 py-2 bg-[#4A6741] hover:bg-[#384F32] text-white text-xs font-bold rounded-2xl"
@@ -405,62 +513,102 @@ export const GroceryMarketplace: React.FC<GroceryMarketplaceProps> = ({
               </button>
             </div>
           ) : (
-            <div className="space-y-3">
-              {myGroceryOrders.map((order) => (
+            <div className="space-y-6">
+              {filteredOrders.map((order) => (
                 <div
                   key={order.id}
-                  className="bg-white rounded-3xl border border-[#E6E2D3] p-5 shadow-xs"
+                  className="bg-white rounded-3xl border border-[#E6E2D3] overflow-hidden shadow-xs hover:shadow-md transition-shadow"
                 >
-                  <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-[#E6E2D3]">
-                    <div>
-                      <span className="font-mono text-xs font-bold bg-[#F2EFE6] px-2.5 py-1 rounded-lg text-[#2D3129]">
+                  {/* Order Overview Header Strip */}
+                  <div className="bg-[#F2EFE6] p-4 sm:p-5 border-b border-[#E6E2D3] flex flex-wrap items-center justify-between gap-3">
+                    <div className="flex flex-wrap items-center gap-3">
+                      <span className="font-mono text-xs font-bold bg-white px-3 py-1 rounded-xl text-[#2D3129] border border-[#E6E2D3] shadow-2xs">
                         #{order.id}
                       </span>
-                      <span className="text-xs text-[#827D6B] ml-2">
-                        Direct from {order.farmerName}
-                      </span>
+                      <div className="text-xs text-[#2D3129]">
+                        <span className="text-[#827D6B]">Harvested by: </span>
+                        <strong className="text-[#4A6741] font-bold">{order.farmerName}</strong>{' '}
+                        <span className="text-[#827D6B]">({order.farmerLocation})</span>
+                      </div>
                     </div>
-                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#E6F0E4] text-[#4A6741] border border-[#C5D9C1]">
-                      Status: {order.status.replace('_', ' ')}
-                    </span>
+
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => openOrderTracker(order)}
+                        className="px-3 py-1.5 bg-white hover:bg-[#FDFCF8] text-[#4A6741] border border-[#C5D9C1] rounded-xl text-xs font-bold transition-colors flex items-center gap-1 shadow-2xs"
+                      >
+                        <Truck className="w-3.5 h-3.5" />
+                        <span>{t.trackOrderTimeline || 'Full Tracker Modal'}</span>
+                      </button>
+                    </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-3 text-xs">
+                  {/* Order Items & Quick Details Grid */}
+                  <div className="p-4 sm:p-5 border-b border-[#F2EFE6] grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
                     <div>
-                      <span className="text-[#827D6B] block font-semibold text-[10px] uppercase">Items</span>
-                      {order.items.map((i, idx) => (
-                        <div key={idx} className="font-semibold text-[#2D3129] mt-0.5">
-                          {i.productName} ({i.quantity} {i.unit})
-                        </div>
-                      ))}
+                      <span className="text-[#827D6B] block font-semibold text-[10px] uppercase">
+                        Farm Harvest Items
+                      </span>
+                      <div className="mt-1 space-y-0.5">
+                        {order.items.map((i, idx) => (
+                          <div key={idx} className="font-semibold text-[#2D3129]">
+                            • {i.productName} ({i.quantity} {i.unit})
+                          </div>
+                        ))}
+                      </div>
                     </div>
 
                     <div>
                       <span className="text-[#827D6B] block font-semibold text-[10px] uppercase">
-                        Delivery Address & ETA
+                        Delivery Destination & ETA
                       </span>
-                      <div className="font-medium text-[#2D3129] mt-0.5">{order.buyerLocation}</div>
-                      <div className="text-[#4A6741] font-bold mt-1">ETA: {order.estimatedDeliveryTime}</div>
+                      <div className="font-medium text-[#2D3129] mt-1">{order.buyerLocation}</div>
+                      <div className="text-[#4A6741] font-bold mt-1">
+                        ETA: {order.estimatedDeliveryTime}
+                      </div>
                     </div>
 
-                    <div className="text-right sm:text-right">
-                      <span className="text-[#827D6B] block font-semibold text-[10px] uppercase">Total</span>
-                      <div className="text-xl font-black text-[#4A6741] font-mono">
+                    <div className="sm:text-right">
+                      <span className="text-[#827D6B] block font-semibold text-[10px] uppercase">
+                        Total Amount
+                      </span>
+                      <div className="text-xl font-black text-[#4A6741] font-mono mt-0.5">
                         ₹{order.totalAmount}
                       </div>
-                      <button
-                        onClick={() => onOpenTraceability(order.items[0]?.batchId || 'BATCH_COIMB_01')}
-                        className="mt-2 text-xs text-[#4A6741] font-bold hover:underline inline-flex items-center gap-1"
-                      >
-                        <Eye className="w-3.5 h-3.5" /> View QR Traceability Timeline
-                      </button>
+                      <span className="text-[10px] text-[#827D6B] block">
+                        Direct Farm Settlement (Zero Commission)
+                      </span>
                     </div>
+                  </div>
+
+                  {/* Embedded Visual Order Status Timeline */}
+                  <div className="p-4 sm:p-5">
+                    <OrderStatusTimeline
+                      order={order}
+                      language={language}
+                      onOpenTraceability={onOpenTraceability}
+                      isCompact={false}
+                    />
                   </div>
                 </div>
               ))}
             </div>
           )}
         </div>
+      )}
+
+      {/* Full Screen Order Tracking Modal */}
+      {isTrackingModalOpen && selectedTrackingOrder && (
+        <OrderTrackingModal
+          order={selectedTrackingOrder}
+          isOpen={isTrackingModalOpen}
+          onClose={() => {
+            setIsTrackingModalOpen(false);
+            setSelectedTrackingOrder(null);
+          }}
+          language={language}
+          onOpenTraceability={onOpenTraceability}
+        />
       )}
 
       {/* Shopping Cart Drawer / Modal */}
