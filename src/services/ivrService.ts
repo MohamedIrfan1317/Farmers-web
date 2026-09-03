@@ -97,13 +97,13 @@ export class IVRService {
           return {
             state: 'LIST_PRODUCE_CATEGORY',
             promptText: {
-              ta: 'பொருள் வகையை தேர்வு செய்க: தக்காளியிற்கு 1, பச்சை நெல்லிற்கு 2, கத்தரிக்காயிற்கு 3, வெங்காயத்திற்கு 4 ஐ அழுத்தவும்.',
-              en: 'Select Product Category: Press 1 for Tomato, Press 2 for Raw Paddy, Press 3 for Brinjal, Press 4 for Onion.',
-              hi: 'फसल चुनें: टमाटर के लिए 1 दबाएं, कच्चे धान के लिए 2 दबाएं, बैंगन के लिए 3 दबाएं, प्याज के लिए 4 दबाएं।',
+              ta: 'பொருள் வகையை தேர்வு செய்க: தக்காளியிற்கு 1, புழுங்கல் அரிசிக்கு 2, கத்தரிக்காயிற்கு 3, வெங்காயத்திற்கு 4 ஐ அழுத்தவும்.',
+              en: 'Select Product Category: Press 1 for Tomato, Press 2 for Processed Rice, Press 3 for Brinjal, Press 4 for Onion.',
+              hi: 'फसल चुनें: टमाटर के लिए 1 दबाएं, तैयार चावल के लिए 2 दबाएं, बैंगन के लिए 3 दबाएं, प्याज के लिए 4 दबाएं।',
             },
             options: [
               { key: '1', label: { ta: '1: தக்காளி (Tomato)', en: '1: Tomato', hi: '1: टमाटर' } },
-              { key: '2', label: { ta: '2: பச்சை நெல் (Raw Paddy)', en: '2: Raw Paddy', hi: '2: कच्चा धान' } },
+              { key: '2', label: { ta: '2: புழுங்கல் அரிசி (Processed Rice)', en: '2: Processed Rice', hi: '2: तैयार चावल' } },
               { key: '3', label: { ta: '3: கத்தரிக்காய் (Brinjal)', en: '3: Brinjal', hi: '3: बैंगन' } },
               { key: '4', label: { ta: '4: வெங்காயம் (Onion)', en: '4: Onion', hi: '4: प्याज' } },
             ],
@@ -180,8 +180,8 @@ export class IVRService {
           this.tempProduceDraft.category = 'VEGETABLE';
           this.tempProduceDraft.name = 'Country Tomatoes (நாட்டு தக்காளி)';
         } else if (key === '2') {
-          this.tempProduceDraft.category = 'PADDY';
-          this.tempProduceDraft.name = 'Bhavani Ponni Raw Paddy (பவானி பொன்னி பச்சை நெல்)';
+          this.tempProduceDraft.category = 'RICE';
+          this.tempProduceDraft.name = 'Bhavani Ponni Boiled Rice (பவானி பொன்னி புழுங்கல் அரிசி)';
         } else if (key === '3') {
           this.tempProduceDraft.category = 'VEGETABLE';
           this.tempProduceDraft.name = 'Green Round Brinjal (பச்சை கத்தரிக்காய்)';
@@ -257,12 +257,12 @@ export class IVRService {
             name: this.tempProduceDraft.name || 'Country Tomatoes',
             quantity: this.tempProduceDraft.quantity || 100,
             originalQuantity: this.tempProduceDraft.quantity || 100,
-            unit: this.tempProduceDraft.category === 'PADDY' ? 'bag' : 'kg',
+            unit: 'kg',
             quality: 'Grade A',
             harvestDate: new Date().toISOString().split('T')[0],
             availableFrom: new Date().toISOString().split('T')[0],
-            expectedPrice: this.tempProduceDraft.expectedPrice || 24,
-            buyerEligibility: this.tempProduceDraft.category === 'PADDY' ? 'GROCERY_ONLY' : 'ALL',
+            expectedPrice: this.tempProduceDraft.expectedPrice || (this.tempProduceDraft.category === 'RICE' ? 58 : 24),
+            buyerEligibility: (this.tempProduceDraft.category === 'RICE' || this.tempProduceDraft.category === 'WHEAT') ? 'GROCERY_ONLY' : 'ALL',
             storageRequired: false,
             imageUrl: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=500&auto=format&fit=crop&q=80',
             status: 'AVAILABLE',

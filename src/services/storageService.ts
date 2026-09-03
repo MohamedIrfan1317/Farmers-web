@@ -145,36 +145,31 @@ const INITIAL_PRODUCTS: ProductListing[] = [
     farmerPhone: '9842156789',
     farmerLocation: 'Thondamuthur, Coimbatore',
     farmerDistrict: 'Coimbatore',
-    batchId: 'BATCH-PAD-2026-012',
-    category: 'PADDY',
-    name: 'Bhavani Ponni Raw Paddy (பவானி பொன்னி பச்சை நெல்)',
+    batchId: 'BATCH-RIC-2026-012',
+    category: 'RICE',
+    name: 'Bhavani Ponni Boiled Rice (பவானி பொன்னி புழுங்கல் அரிசி)',
     nameTranslations: {
-      ta: 'பவானி பொன்னி பச்சை நெல்',
-      en: 'Bhavani Ponni Raw Paddy',
-      hi: 'भवानी पोन्नी कच्चा धान',
+      ta: 'பவானி பொன்னி புழுங்கல் அரிசி',
+      en: 'Bhavani Ponni Boiled Rice',
+      hi: 'भवानी पोन्नी उबला चावल',
     },
-    quantity: 280, // bags
-    originalQuantity: 300,
-    unit: 'bag',
+    quantity: 450, // kg
+    originalQuantity: 500,
+    unit: 'kg',
     quality: 'Grade A',
     harvestDate: '2026-08-25',
     availableFrom: '2026-08-28',
-    expectedPrice: 1450, // per 50kg bag
-    suggestedPriceMin: 1400,
-    suggestedPriceMax: 1500,
-    buyerEligibility: 'GROCERY_ONLY', // Strict Rule
+    expectedPrice: 56, // per kg
+    suggestedPriceMin: 52,
+    suggestedPriceMax: 60,
+    buyerEligibility: 'GROCERY_ONLY', // Strict Rule: Processed Rice for Grocery Buyers Only
     storageRequired: false,
     imageUrl: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&auto=format&fit=crop&q=80',
-    qrCodeData: 'FC-TRACE-PROD02-BATCH-PAD-2026-012-GROCERYONLY',
+    qrCodeData: 'FC-TRACE-PROD02-BATCH-RIC-2026-012-GROCERYONLY',
     status: 'AVAILABLE',
-    daysInStock: 6,
+    daysInStock: 4,
     stockAgeStatus: 'FRESH',
     organic: false,
-    paddyDetails: {
-      totalHarvestBags: 300,
-      processedToRiceBags: 20,
-      remainingRawPaddyBags: 280,
-    },
     createdAt: new Date().toISOString(),
   },
   {
@@ -201,10 +196,10 @@ const INITIAL_PRODUCTS: ProductListing[] = [
     expectedPrice: 58,
     suggestedPriceMin: 55,
     suggestedPriceMax: 62,
-    buyerEligibility: 'ALL', // Milled rice allowed for Bulk & Grocery
+    buyerEligibility: 'GROCERY_ONLY', // Strict Rule: Processed Rice for Grocery Buyers Only
     storageRequired: false,
     imageUrl: 'https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?w=500&auto=format&fit=crop&q=80',
-    qrCodeData: 'FC-TRACE-PROD03-BATCH-RIC-2026-004-RICE-ALL',
+    qrCodeData: 'FC-TRACE-PROD03-BATCH-RIC-2026-004-GROCERYONLY',
     status: 'AVAILABLE',
     daysInStock: 3,
     stockAgeStatus: 'FRESH',
@@ -220,27 +215,27 @@ const INITIAL_PRODUCTS: ProductListing[] = [
     farmerDistrict: 'Varanasi',
     batchId: 'BATCH-WHT-2026-051',
     category: 'WHEAT',
-    name: 'Sharbati Raw Golden Wheat (शरबती कच्चा गेहूं)',
+    name: 'Sharbati Processed Wheat Atta / Flour (சரபத்தி கோதுமை மாவு)',
     nameTranslations: {
-      ta: 'சர்பதி மூல கோதுமை',
-      en: 'Sharbati Raw Golden Wheat',
-      hi: 'शरबती कच्चा गेहूं',
+      ta: 'சரபத்தி பதப்படுத்தப்பட்ட கோதுமை மாவு',
+      en: 'Sharbati Processed Wheat Atta',
+      hi: 'शरबती प्रोसेस्ड गेहूं आटा',
     },
-    quantity: 150,
-    originalQuantity: 150,
-    unit: 'bag',
+    quantity: 350,
+    originalQuantity: 400,
+    unit: 'kg',
     quality: 'Grade A',
     harvestDate: '2026-08-20',
     availableFrom: '2026-08-25',
-    expectedPrice: 1600,
-    suggestedPriceMin: 1550,
-    suggestedPriceMax: 1650,
-    buyerEligibility: 'GROCERY_ONLY', // Strict Rule
+    expectedPrice: 48,
+    suggestedPriceMin: 44,
+    suggestedPriceMax: 52,
+    buyerEligibility: 'GROCERY_ONLY', // Strict Rule: Processed Wheat for Grocery Buyers Only
     storageRequired: false,
     imageUrl: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=500&auto=format&fit=crop&q=80',
     qrCodeData: 'FC-TRACE-PROD04-BATCH-WHT-2026-051-GROCERYONLY',
     status: 'AVAILABLE',
-    daysInStock: 7,
+    daysInStock: 5,
     stockAgeStatus: 'FRESH',
     organic: true,
     createdAt: new Date().toISOString(),
@@ -654,12 +649,12 @@ const INITIAL_ORDERS: Order[] = [
     farmerLocation: 'Thondamuthur, Coimbatore',
     items: [
       {
-        productId: 'prod_04',
-        productName: 'Traditional Raw Ponni Paddy (பச்சை நெல் மூட்டை)',
-        category: 'PADDY',
-        quantity: 2,
-        unit: 'bag',
-        unitPrice: 1250,
+        productId: 'prod_02',
+        productName: 'Bhavani Ponni Boiled Rice (பவானி பொன்னி புழுங்கல் அரிசி)',
+        category: 'RICE',
+        quantity: 50,
+        unit: 'kg',
+        unitPrice: 50,
         totalPrice: 2500,
         farmerId: 'farmer_01',
         farmerName: 'Muthusamy Gounder',
@@ -678,7 +673,7 @@ const INITIAL_ORDERS: Order[] = [
       {
         status: 'ORDER_PLACED',
         timestamp: 'Yesterday 11:00 AM',
-        note: 'Paddy bags order placed by Kavitha',
+        note: 'Rice order placed by Kavitha',
       },
       {
         status: 'FARMER_ACCEPTED',
@@ -754,13 +749,13 @@ const INITIAL_BULK_RFQS: BulkRequirement[] = [
     buyerBusinessType: 'Restaurant & Catering',
     buyerLocation: 'Gandhipuram, Coimbatore',
     buyerPhone: '9894455667',
-    category: 'RICE',
-    productName: 'Milled Sona Masoori / Ponni Rice',
-    requiredQuantity: 2000,
+    category: 'VEGETABLE',
+    productName: 'Fresh Country Red Onion (சிவப்பு வெங்காயம்)',
+    requiredQuantity: 1500,
     unit: 'kg',
-    targetPrice: 52,
+    targetPrice: 28,
     requiredDate: 'Within 3 Days',
-    notes: 'Looking for continuous monthly supplier of aged milled rice. Must be stone-free.',
+    notes: 'Looking for continuous weekly supplier of fresh red onion. Must be dry and well cured.',
     status: 'OPEN',
     createdAt: new Date(Date.now() - 3600 * 1000 * 24).toISOString(),
     offers: [],
@@ -853,7 +848,7 @@ const INITIAL_NOTIFICATIONS: NotificationItem[] = [
     userId: 'grocery_01',
     userRole: 'GROCERY',
     title: 'Order #ORD-2026-7734 Delivered Fresh',
-    message: 'Traditional Raw Ponni Paddy (2 bags) successfully delivered to RS Puram with verified QR traceability.',
+    message: 'Traditional Processed Ponni Rice (50 kg) successfully delivered to RS Puram with verified QR traceability.',
     type: 'ORDER',
     read: true,
     createdAt: new Date(Date.now() - 3600 * 1000 * 24).toISOString(),
@@ -921,37 +916,26 @@ const INITIAL_PRICE_TRENDS: PriceTrend[] = [
     mandiPriceGovt: 26,
   },
   {
-    category: 'PADDY',
-    productName: 'Ponni Raw Paddy',
-    currentAvgPrice: 1450,
-    previousWeekAvgPrice: 1420,
-    unit: 'bag',
-    trend: 'STABLE',
-    changePercent: 2.1,
-    suggestedSellingRange: { min: 1400, max: 1500 },
-    mandiPriceGovt: 1350,
-  },
-  {
     category: 'RICE',
-    productName: 'Milled Ponni Rice',
+    productName: 'Processed Ponni Rice',
     currentAvgPrice: 58,
-    previousWeekAvgPrice: 56,
+    previousWeekAvgPrice: 55,
     unit: 'kg',
     trend: 'UP',
-    changePercent: 3.5,
+    changePercent: 5.4,
     suggestedSellingRange: { min: 55, max: 62 },
     mandiPriceGovt: 48,
   },
   {
     category: 'WHEAT',
-    productName: 'Sharbati Raw Wheat',
-    currentAvgPrice: 1600,
-    previousWeekAvgPrice: 1580,
-    unit: 'bag',
+    productName: 'Processed Sharbati Wheat Flour',
+    currentAvgPrice: 48,
+    previousWeekAvgPrice: 46,
+    unit: 'kg',
     trend: 'STABLE',
-    changePercent: 1.2,
-    suggestedSellingRange: { min: 1550, max: 1650 },
-    mandiPriceGovt: 1480,
+    changePercent: 4.3,
+    suggestedSellingRange: { min: 44, max: 52 },
+    mandiPriceGovt: 38,
   },
 ];
 
@@ -985,13 +969,60 @@ class StorageService {
       }
 
       const savedProducts = localStorage.getItem(STORAGE_KEYS.PRODUCTS);
-      if (savedProducts) this.products = JSON.parse(savedProducts);
+      if (savedProducts) {
+        let loaded: ProductListing[] = JSON.parse(savedProducts);
+        // Sanitize: Migrate any lingering raw paddy or raw wheat, and enforce GROCERY_ONLY for rice and wheat
+        loaded = loaded.map((p) => {
+          if (p.category === 'PADDY' || p.name.toLowerCase().includes('raw paddy')) {
+            return {
+              ...p,
+              category: 'RICE' as ProductCategory,
+              name: 'Bhavani Ponni Boiled Rice (பவானி பொன்னி புழுங்கல் அரிசி)',
+              nameTranslations: {
+                ta: 'பவானி பொன்னி புழுங்கல் அரிசி',
+                en: 'Bhavani Ponni Boiled Rice',
+                hi: 'भवानी पोन्नी उबला चावल',
+              },
+              unit: 'kg',
+              expectedPrice: 56,
+              buyerEligibility: 'GROCERY_ONLY',
+            };
+          }
+          if (p.name.toLowerCase().includes('raw wheat') || p.name.toLowerCase().includes('raw golden wheat')) {
+            return {
+              ...p,
+              category: 'WHEAT' as ProductCategory,
+              name: 'Sharbati Processed Wheat Atta / Flour (சரபத்தி கோதுமை மாவு)',
+              nameTranslations: {
+                ta: 'சரபத்தி பதப்படுத்தப்பட்ட கோதுமை மாவு',
+                en: 'Sharbati Processed Wheat Atta',
+                hi: 'शरबती प्रोसेस्ड गेहूं आटा',
+              },
+              unit: 'kg',
+              expectedPrice: 48,
+              buyerEligibility: 'GROCERY_ONLY',
+            };
+          }
+          if (p.category === 'RICE' || p.category === 'WHEAT') {
+            return {
+              ...p,
+              buyerEligibility: 'GROCERY_ONLY',
+            };
+          }
+          return p;
+        });
+        this.products = loaded;
+      }
 
       const savedOrders = localStorage.getItem(STORAGE_KEYS.ORDERS);
       if (savedOrders) this.orders = JSON.parse(savedOrders);
 
       const savedRfqs = localStorage.getItem(STORAGE_KEYS.BULK_RFQS);
-      if (savedRfqs) this.bulkRfqs = JSON.parse(savedRfqs);
+      if (savedRfqs) {
+        const loadedRfqs: BulkRequirement[] = JSON.parse(savedRfqs);
+        // Bulk RFQs must never include RICE, WHEAT, or PADDY
+        this.bulkRfqs = loadedRfqs.filter((r) => r.category !== 'RICE' && r.category !== 'WHEAT' && r.category !== 'PADDY');
+      }
 
       const savedColdRooms = localStorage.getItem(STORAGE_KEYS.COLD_ROOMS);
       if (savedColdRooms) this.coldRooms = JSON.parse(savedColdRooms);
@@ -1248,7 +1279,7 @@ class StorageService {
       expectedPrice: params.ricePricePerKg,
       suggestedPriceMin: Math.max(40, params.ricePricePerKg - 5),
       suggestedPriceMax: params.ricePricePerKg + 8,
-      buyerEligibility: params.enableBulkForRice ? 'ALL' : 'GROCERY_ONLY',
+      buyerEligibility: 'GROCERY_ONLY', // Strict Rule: Processed Rice is only for Grocery Buyers
       storageRequired: false,
       imageUrl: 'https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?w=500&auto=format&fit=crop&q=80',
       qrCodeData: `FC-TRACE-RICE-${riceBatchId}-PARENT-${paddy.batchId}`,
@@ -1414,6 +1445,23 @@ class StorageService {
           title: `Order Status: ${newStatus.replace('_', ' ')}`,
           message: `Order #${ord.id}: ${note || `Your order status is now ${newStatus.replace('_', ' ')}`}`,
           type: 'ORDER',
+          metadata: {
+            orderId: ord.id,
+            status: newStatus,
+          },
+        });
+
+        // Notify Farmer
+        this.addNotification({
+          userId: ord.farmerId,
+          userRole: 'FARMER',
+          title: `Order #${ord.id} Status: ${newStatus.replace('_', ' ')}`,
+          message: `Order #${ord.id} from ${ord.buyerName}: ${note || `Status updated to ${newStatus.replace('_', ' ')}`}`,
+          type: 'ORDER',
+          metadata: {
+            orderId: ord.id,
+            status: newStatus,
+          },
         });
 
         return {
@@ -1439,11 +1487,11 @@ class StorageService {
     rfq?: BulkRequirement;
     error?: string;
   } {
-    // STRICT VALIDATION: Bulk Buyer CANNOT post RFQ for raw paddy or raw wheat
+    // STRICT VALIDATION: Bulk Buyer CANNOT post RFQ for rice, wheat, or paddy
     if (EligibilityService.isGroceryOnlyCategory(data.category)) {
       return {
         success: false,
-        error: 'Restriction: Raw paddy and raw wheat cannot be procured by Bulk Buyers. This product is currently available only for Grocery Buyers.',
+        error: 'Restriction: Processed rice and processed wheat are reserved exclusively for Grocery Buyers. Bulk Buyers cannot post RFQs for these categories.',
       };
     }
 
@@ -1767,7 +1815,7 @@ class StorageService {
   public simulateBulkRFQNotification(): NotificationItem {
     const crops = [
       { name: 'Grade A Country Tomatoes', qty: '800 kg', price: 21, buyer: 'Taj Gateway Coimbatore' },
-      { name: 'Milled Sona Masoori Rice', qty: '3,000 kg', price: 54, buyer: 'PSG College Central Kitchen' },
+      { name: 'Organic Robust Carrots', qty: '600 kg', price: 38, buyer: 'PSG College Central Kitchen' },
       { name: 'Fresh Small Shallot Onions', qty: '400 kg', price: 44, buyer: 'Anand Bhavan Canteen' },
     ];
     const crop = crops[Math.floor(Math.random() * crops.length)];

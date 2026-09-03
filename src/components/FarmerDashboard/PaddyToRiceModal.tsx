@@ -99,7 +99,7 @@ export const PaddyToRiceModal: React.FC<PaddyToRiceModalProps> = ({
         <div className="p-3.5 bg-amber-50/80 border border-amber-200 rounded-2xl text-xs text-amber-950 flex items-start gap-2.5 mb-6">
           <span className="text-base">💡</span>
           <div>
-            <strong>Smart Farmer Strategy:</strong> You do not need to mill your entire paddy harvest. Mill only a selected batch (e.g. 10–25 bags) to supply local grocery and bulk customers at retail rates, while keeping the rest in safe storage.
+            <strong>Smart Farmer Strategy:</strong> On our platform, all processed rice is offered directly to household Grocery buyers at premium fair retail rates. Bulk commercial buyers cannot purchase rice.
           </div>
         </div>
 
@@ -193,28 +193,22 @@ export const PaddyToRiceModal: React.FC<PaddyToRiceModalProps> = ({
             </div>
           </div>
 
-          {/* Bulk Buyer Eligibility Toggle for Rice */}
+          {/* Strict Grocery Buyer Policy Notice for Rice */}
           <div className="p-3.5 bg-emerald-50/70 border border-emerald-200 rounded-2xl flex items-start gap-3">
-            <input
-              type="checkbox"
-              id="enableBulkRice"
-              checked={enableBulkForRice}
-              onChange={(e) => setEnableBulkForRice(e.target.checked)}
-              className="w-5 h-5 mt-0.5 text-emerald-600 rounded-lg focus:ring-emerald-500"
-            />
-            <label htmlFor="enableBulkRice" className="text-xs text-emerald-950 font-medium cursor-pointer">
+            <ShieldCheck className="w-5 h-5 text-emerald-700 shrink-0 mt-0.5" />
+            <div className="text-xs text-emerald-950 font-medium">
               <strong className="block text-emerald-900 font-bold">
-                {t.enableBulkForRice}
+                Grocery Buyers Only
               </strong>
-              Processed rice is approved for both grocery households and bulk commercial buyers (Hotels, Mess, Retailers). Raw paddy remains strictly Grocery Only.
-            </label>
+              Processed rice is listed exclusively for household Grocery buyers. Bulk commercial buyers cannot purchase rice on this platform.
+            </div>
           </div>
 
           {/* Revenue Breakdown */}
           <div className="p-3 bg-stone-100 rounded-2xl flex items-center justify-between text-xs">
             <div>
               <span className="text-stone-500 block">Remaining Raw Paddy:</span>
-              <strong className="text-stone-900">{remainingPaddyBags} Bags (Grocery Only)</strong>
+              <strong className="text-stone-900">{remainingPaddyBags} Bags</strong>
             </div>
             <div className="text-right">
               <span className="text-stone-500 block">Estimated Profit Gain:</span>

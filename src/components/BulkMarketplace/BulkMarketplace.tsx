@@ -105,10 +105,10 @@ export const BulkMarketplace: React.FC<BulkMarketplaceProps> = ({
   const handleCreateRFQ = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // STRICT CHECK: Raw paddy or raw wheat cannot be submitted as RFQ
+    // STRICT CHECK: Rice, Wheat, and raw grains cannot be submitted as RFQ by Bulk Buyers
     if (EligibilityService.isGroceryOnlyCategory(rfqCategory)) {
       alert(
-        'Strict Policy: Raw paddy and raw wheat are reserved exclusively for Grocery individual buyers and cannot be requested by commercial bulk buyers.'
+        'Strict Policy: Processed rice and processed wheat are reserved exclusively for Grocery individual buyers and cannot be requested by commercial bulk buyers.'
       );
       return;
     }
@@ -196,7 +196,7 @@ export const BulkMarketplace: React.FC<BulkMarketplaceProps> = ({
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search wholesale vegetables, fruits, rice..."
+              placeholder="Search wholesale vegetables, fruits, produce..."
               className="w-full pl-10 pr-4 py-2.5 bg-white/95 text-[#2D3129] placeholder-[#827D6B] rounded-2xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-[#D97757]"
             />
           </div>
@@ -237,12 +237,12 @@ export const BulkMarketplace: React.FC<BulkMarketplaceProps> = ({
           </div>
           <div>
             <h4 className="text-sm font-bold text-[#D97757]">
-              Notice: {t.groceryOnlyNotice}
+              Notice: Processed Rice & Processed Wheat are for Grocery Buyers Only
             </h4>
             <p className="mt-1 leading-relaxed text-[#2D3129]">
-              Raw paddy and raw wheat cannot be purchased by commercial bulk buyers to protect local food security and household availability.
+              As per platform direct procurement policy, processed rice and processed wheat are reserved exclusively for individual household grocery buyers. Raw paddy and raw wheat are not available on this platform.
               <strong className="block mt-1 text-[#4A6741]">
-                ✓ Available Alternative: Processed Rice (Ponni, Basmati, Sona Masoori) and other wholesale farm produce are fully open for bulk procurement.
+                ✓ Available Alternative: Wholesale fresh vegetables, fruits, and commercial farm produce are fully open for bulk procurement.
               </strong>
             </p>
           </div>
@@ -514,7 +514,6 @@ export const BulkMarketplace: React.FC<BulkMarketplaceProps> = ({
                 >
                   <option value="VEGETABLE">Vegetables</option>
                   <option value="FRUIT">Fruits</option>
-                  <option value="RICE">Processed Rice</option>
                   <option value="OTHER">Other Approved Produce</option>
                 </select>
               </div>

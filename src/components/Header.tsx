@@ -21,6 +21,7 @@ import {
 import { Language, UserRole, UserProfile, NotificationItem } from '../types';
 import { storageService } from '../services/storageService';
 import { getTranslation } from '../translations';
+import { NotificationOverlayPanel } from './Notifications/NotificationOverlayPanel';
 
 interface HeaderProps {
   currentLanguage: Language;
@@ -49,7 +50,7 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const t = getTranslation(currentLanguage);
   const [notifications, setNotifications] = useState<NotificationItem[]>([]);
-  const [showNotifDropdown, setShowNotifDropdown] = useState(false);
+  const [isNotifOverlayOpen, setIsNotifOverlayOpen] = useState(false);
   const [showRoleDropdown, setShowRoleDropdown] = useState(false);
 
   useEffect(() => {
@@ -225,62 +226,24 @@ export const Header: React.FC<HeaderProps> = ({
               <span>🔍 {currentLanguage === 'ta' ? 'QR ஆய்வு' : currentLanguage === 'hi' ? 'QR स्कैन' : 'Scan QR'}</span>
             </button>
 
-            {/* Notification Bell with Dropdown */}
+            {/* Persistent Notification Bell with Activity Overlay Trigger */}
             <div className="relative">
               <button
-                onClick={() => setShowNotifDropdown(!showNotifDropdown)}
-                className="relative p-2 text-[#827D6B] hover:text-[#2D3129] hover:bg-[#F2EFE6] rounded-full transition-colors"
-                aria-label="Notifications"
+                id="header-persistent-notification-bell-btn"
+                onClick={() => setIsNotifOverlayOpen(true)}
+                className="relative p-2 sm:p-2.5 text-[#2D3129] bg-[#F2EFE6] hover:bg-[#EAE6DA] rounded-full transition-all border border-[#E6E2D3] flex items-center justify-center group shadow-xs"
+                aria-label="Activity Notifications & Alerts"
+                title="Activity Feed: Order Status Updates, Bulk RFQs & Stock Alerts"
               >
-                <Bell className="w-5 h-5" />
-                {unreadCount > 0 && (
-                  <span className="absolute top-1.5 right-1.5 w-4 h-4 bg-[#D97757] text-white text-[10px] font-bold rounded-full flex items-center justify-center shadow-xs">
-                    {unreadCount}
+                <Bell className="w-5 h-5 text-[#2D3129] group-hover:scale-110 transition-transform" />
+                {unreadCount > 0 ? (
+                  <span className="absolute -top-1 -right-1 min-w-[19px] h-[19px] px-1 bg-[#D97757] text-white text-[10px] font-black rounded-full flex items-center justify-center shadow-xs ring-2 ring-white animate-pulse">
+                    {unreadCount > 9 ? '9+' : unreadCount}
                   </span>
+                ) : (
+                  <span className="absolute bottom-1 right-1 w-2 h-2 rounded-full bg-emerald-500 ring-1 ring-white" />
                 )}
               </button>
-
-              {showNotifDropdown && (
-                <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-white rounded-3xl shadow-xl border border-[#E6E2D3] p-3.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                  <div className="flex items-center justify-between pb-2 border-b border-[#E6E2D3] mb-2">
-                    <span className="text-xs font-bold text-[#2D3129]">
-                      {currentLanguage === 'ta' ? 'அறிவிப்புகள்' : currentLanguage === 'hi' ? 'अधिसूचनाएं' : 'Notifications'} ({notifications.length})
-                    </span>
-                    <button
-                      onClick={() => {
-                        notifications.forEach((n) => storageService.markNotificationAsRead(n.id));
-                        setShowNotifDropdown(false);
-                      }}
-                      className="text-[11px] text-[#4A6741] hover:underline font-semibold"
-                    >
-                      {currentLanguage === 'ta' ? 'அனைத்தும் படித்ததாக குறிக்க' : currentLanguage === 'hi' ? 'सभी पढ़ा हुआ मार्क करें' : 'Mark all read'}
-                    </button>
-                  </div>
-                  <div className="max-h-72 overflow-y-auto divide-y divide-[#F2EFE6]">
-                    {notifications.length === 0 ? (
-                      <p className="text-xs text-[#827D6B] py-4 text-center">No notifications yet.</p>
-                    ) : (
-                      notifications.map((notif) => (
-                        <div
-                          key={notif.id}
-                          onClick={() => storageService.markNotificationAsRead(notif.id)}
-                          className={`py-2.5 px-2 rounded-xl cursor-pointer transition-colors ${
-                            !notif.read ? 'bg-[#F2EFE6] text-[#2D3129] font-medium' : 'text-[#827D6B] hover:bg-[#FDFCF8]'
-                          }`}
-                        >
-                          <div className="flex items-start justify-between gap-1">
-                            <span className="text-xs font-bold text-[#2D3129]">{notif.title}</span>
-                            <span className="text-[10px] text-[#827D6B] whitespace-nowrap">
-                              {new Date(notif.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                            </span>
-                          </div>
-                          <p className="text-xs text-[#827D6B] mt-0.5 line-clamp-2">{notif.message}</p>
-                        </div>
-                      ))
-                    )}
-                  </div>
-                </div>
-              )}
             </div>
 
             {/* User Account / Role Switcher / Logout Controls */}
@@ -486,6 +449,14 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
       </div>
+
+      {/* Persistent Activity Notifications Overlay Panel */}
+      <NotificationOverlayPanel
+        isOpen={isNotifOverlayOpen}
+        onClose={() => setIsNotifOverlayOpen(false)}
+        language={currentLanguage}
+        currentUserId={currentUser?.id}
+      />
     </header>
   );
 };

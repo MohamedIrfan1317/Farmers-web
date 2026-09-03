@@ -67,14 +67,14 @@ export const translations = {
     // Product Categories
     catVegetable: 'Vegetables',
     catFruit: 'Fruits',
-    catPaddy: 'Raw Paddy (Grocery Only)',
-    catWheat: 'Raw Wheat (Grocery Only)',
-    catRice: 'Processed Rice',
+    catPaddy: 'Paddy (Legacy Reference)',
+    catWheat: 'Processed Wheat (Grocery Only)',
+    catRice: 'Processed Rice (Grocery Only)',
     catOther: 'Other Produce',
     
     // Product Eligibility Warning
     bulkPaddyWheatWarning: 'This product is currently available only for Grocery Buyers.',
-    bulkRestrictionExplanation: 'As per direct procurement policy, raw paddy and raw wheat are reserved exclusively for individual household grocery buyers. Bulk buyers can purchase processed rice and other commercial produce.',
+    bulkRestrictionExplanation: 'As per direct procurement policy, processed rice and processed wheat are reserved exclusively for individual household grocery buyers. Bulk buyers can purchase fresh vegetables, fruits, and wholesale produce.',
     groceryOnlyBadge: 'Grocery Buyers Only',
     bulkEligibleBadge: 'Bulk & Grocery Eligible',
     
@@ -107,7 +107,7 @@ export const translations = {
     listProduceSubtitle: 'Zero commission direct marketplace with instant buyer notification',
     productCategory: 'Product Category',
     productName: 'Product Name',
-    productNamePlaceholder: 'e.g. Tomato / Country Brinjal / Ponni Paddy',
+    productNamePlaceholder: 'e.g. Tomato / Country Brinjal / Ponni Rice',
     quantityAvailable: 'Quantity Available',
     harvestDate: 'Harvest Date',
     availableFromDate: 'Available From',
@@ -356,14 +356,14 @@ export const translations = {
     // Product Categories
     catVegetable: 'காய்கறிகள்',
     catFruit: 'பழங்கள்',
-    catPaddy: 'பச்சை நெல் (மளிகை வாங்குபவருக்கு மட்டும்)',
-    catWheat: 'கோதுமை (மளிகை வாங்குபவருக்கு மட்டும்)',
-    catRice: 'அரைக்கப்பட்ட அரிசி',
+    catPaddy: 'நெல் (பழைய குறிப்பு)',
+    catWheat: 'பதப்படுத்தப்பட்ட கோதுமை (மளிகை நுகர்வோருக்கு மட்டும்)',
+    catRice: 'அரைக்கப்பட்ட அரிசி (மளிகை நுகர்வோருக்கு மட்டும்)',
     catOther: 'பிற பண்ணை பொருட்கள்',
     
     // Product Eligibility Warning
     bulkPaddyWheatWarning: 'இந்த தயாரிப்பு தற்போது மளிகை வாங்குபவர்களுக்கு மட்டுமே கிடைக்கிறது.',
-    bulkRestrictionExplanation: 'நேரடி கொள்முதல் கொள்கையின்படி, மூல நெல் மற்றும் மூல கோதுமை தனிநபர் குடும்ப வாடிக்கையாளர்களுக்கு மட்டுமே ஒதுக்கப்பட்டுள்ளது. மொத்த வாங்குபவர்கள் அரிசி மற்றும் பிற பொருட்களை வாங்கலாம்.',
+    bulkRestrictionExplanation: 'நேரடி கொள்முதல் கொள்கையின்படி, பதப்படுத்தப்பட்ட அரிசி மற்றும் கோதுமை தனிநபர் குடும்ப வாடிக்கையாளர்களுக்கு மட்டுமே ஒதுக்கப்பட்டுள்ளது. மொத்த வாங்குபவர்கள் காய்கறிகள், பழங்கள் மற்றும் பிற பண்ணை பொருட்களை வாங்கலாம்.',
     groceryOnlyBadge: 'மளிகை நுகர்வோருக்கு மட்டும்',
     bulkEligibleBadge: 'மொத்த & சில்லறை இருவருக்கும்',
     
@@ -626,14 +626,14 @@ export const translations = {
     // Product Categories
     catVegetable: 'सब्जियां',
     catFruit: 'फल',
-    catPaddy: 'कच्चा धान (केवल किराना खरीदार)',
-    catWheat: 'कच्चा गेहूं (केवल किराना खरीदार)',
-    catRice: 'तैयार चावल',
+    catPaddy: 'धान (रेफरेंस)',
+    catWheat: 'प्रोसेस्ड गेहूं (केवल किराना खरीदार)',
+    catRice: 'तैयार चावल (केवल किराना खरीदार)',
     catOther: 'अन्य कृषि उत्पाद',
     
     // Product Eligibility Warning
     bulkPaddyWheatWarning: 'यह उत्पाद वर्तमान में केवल किराना खरीदारों के लिए उपलब्ध है।',
-    bulkRestrictionExplanation: 'प्रत्यक्ष खरीद नीति के अनुसार, कच्चा धान और कच्चा गेहूं केवल व्यक्तिगत किराना खरीदारों के लिए आरक्षित है। थोक खरीदार चावल और अन्य उत्पाद खरीद सकते हैं।',
+    bulkRestrictionExplanation: 'प्रत्यक्ष खरीद नीति के अनुसार, तैयार चावल और गेहूं केवल व्यक्तिगत किराना खरीदारों के लिए आरक्षित है। थोक खरीदार ताजी सब्जियां, फल और अन्य उत्पाद खरीद सकते हैं।',
     groceryOnlyBadge: 'केवल किराना खरीदार',
     bulkEligibleBadge: 'थोक और किराना दोनों के लिए',
     

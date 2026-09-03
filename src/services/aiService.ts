@@ -58,8 +58,8 @@ export class AIService {
         forecastPeriod: 'Monthly Regular Demand',
         demandLevel: 'HIGH',
         confidencePercent: 91,
-        recommendedAction: 'Process raw paddy into rice to capture steady 25-30% higher profit margin.',
-        primaryBuyerTypes: ['Bulk Retailers', 'Hostels', 'Families'],
+        recommendedAction: 'Direct supply of processed rice to household grocery buyers captures 25-30% higher margin.',
+        primaryBuyerTypes: ['Household Grocery Buyers Only'],
       },
       {
         productName: 'Red Onion (வெங்காயம்)',
@@ -72,13 +72,13 @@ export class AIService {
         primaryBuyerTypes: ['Wholesale Markets', 'Daily Consumers'],
       },
       {
-        productName: 'Bhavani Ponni Raw Paddy (நெல்)',
-        category: 'PADDY',
+        productName: 'Sharbati Processed Wheat (கோதுமை மாவு)',
+        category: 'WHEAT',
         location,
-        forecastPeriod: 'Upcoming Procurement Cycle',
+        forecastPeriod: 'Monthly Regular Demand',
         demandLevel: 'HIGH',
-        confidencePercent: 89,
-        recommendedAction: 'Retain for direct grocery consumers or process selected batches into premium rice.',
+        confidencePercent: 92,
+        recommendedAction: 'Direct grocery supply in 5kg & 10kg packs for urban families with zero middlemen cuts.',
         primaryBuyerTypes: ['Individual Grocery Buyers Only'],
       },
       {
@@ -195,20 +195,14 @@ export class AIService {
     let suggestedMax = 26;
     let recommended = 25;
 
-    if (isPaddy) {
-      mandiBase = 1350; // per bag
-      platformAvg = 1450;
-      suggestedMin = 1400;
-      suggestedMax = 1500;
-      recommended = 1450;
-    } else if (isWheat) {
-      mandiBase = 1480;
-      platformAvg = 1600;
-      suggestedMin = 1550;
-      suggestedMax = 1650;
-      recommended = 1600;
+    if (isWheat) {
+      mandiBase = 32; // per kg for processed wheat
+      platformAvg = 42;
+      suggestedMin = 40;
+      suggestedMax = 46;
+      recommended = 42;
     } else if (isRice) {
-      mandiBase = 48; // per kg
+      mandiBase = 48; // per kg for processed rice
       platformAvg = 58;
       suggestedMin = 55;
       suggestedMax = 62;

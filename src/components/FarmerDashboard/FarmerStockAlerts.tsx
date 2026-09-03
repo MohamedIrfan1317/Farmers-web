@@ -131,7 +131,7 @@ export const FarmerStockAlerts: React.FC<FarmerStockAlertsProps> = ({ alerts, la
                     <div className="mt-2.5 p-3 bg-[#F2EFE6] rounded-2xl border border-[#E6E2D3] text-[11px] font-semibold text-[#2D3129] flex items-center gap-2">
                       <ShieldCheck className="w-4 h-4 text-[#D97757] shrink-0" />
                       <span>
-                        Strict Policy Enforced: Raw paddy and wheat recommendations are restricted strictly to individual grocery consumers and direct local families. Bulk commercial buyers are excluded.
+                        Strict Policy Enforced: Processed rice and processed wheat recommendations are restricted strictly to individual grocery consumers. Bulk commercial buyers are excluded, and raw grains are not permitted.
                       </span>
                     </div>
                   ) : (

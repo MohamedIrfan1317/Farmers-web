@@ -62,7 +62,7 @@ export const GroceryMarketplace: React.FC<GroceryMarketplaceProps> = ({
   const [paymentMethod, setPaymentMethod] = useState<'UPI' | 'COD' | 'CARD'>('UPI');
   const [orderSuccessMsg, setOrderSuccessMsg] = useState<string>('');
 
-  // Grocery buyers are eligible for all products (including Raw Paddy and Raw Wheat)
+  // Grocery buyers can view fresh farm produce, fruits, vegetables, and processed rice & wheat
   const eligibleProducts = EligibilityService.filterEligibleProducts(products, 'GROCERY');
 
   // Filter by category and search query
@@ -243,7 +243,7 @@ export const GroceryMarketplace: React.FC<GroceryMarketplaceProps> = ({
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search tomatoes, paddy, rice, village..."
+              placeholder="Search fresh vegetables, fruits, rice, wheat..."
               className="w-full pl-10 pr-4 py-2.5 bg-white/95 text-[#2D3129] placeholder-[#827D6B] rounded-2xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-[#D97757]"
             />
           </div>
@@ -254,9 +254,8 @@ export const GroceryMarketplace: React.FC<GroceryMarketplaceProps> = ({
               { id: 'ALL', label: t.tabAllProduce },
               { id: 'VEGETABLE', label: t.catVegetable },
               { id: 'FRUIT', label: t.catFruit },
-              { id: 'PADDY', label: `${t.catPaddy} (Direct)` },
-              { id: 'WHEAT', label: `${t.catWheat} (Direct)` },
               { id: 'RICE', label: t.catRice },
+              { id: 'WHEAT', label: t.catWheat },
             ].map((cat) => (
               <button
                 key={cat.id}

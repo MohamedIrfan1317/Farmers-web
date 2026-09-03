@@ -33,8 +33,8 @@ interface ListProduceModalProps {
 
 const PRODUCE_PRESETS = [
   { name: 'Country Tomatoes (நாட்டு தக்காளி)', category: 'VEGETABLE' as ProductCategory, unit: 'kg' as QuantityUnit, price: 24, img: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=500&auto=format&fit=crop&q=80' },
-  { name: 'Bhavani Ponni Raw Paddy (பவானி பொன்னி நெல்)', category: 'PADDY' as ProductCategory, unit: 'bag' as QuantityUnit, price: 1450, img: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&auto=format&fit=crop&q=80' },
-  { name: 'Sharbati Raw Wheat (கோதுமை)', category: 'WHEAT' as ProductCategory, unit: 'bag' as QuantityUnit, price: 1600, img: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=500&auto=format&fit=crop&q=80' },
+  { name: 'Processed Ponni Boiled Rice (பொன்னி புழுங்கல் அரிசி)', category: 'RICE' as ProductCategory, unit: 'kg' as QuantityUnit, price: 56, img: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&auto=format&fit=crop&q=80' },
+  { name: 'Processed Sharbati Wheat Flour / Atta (கோதுமை மாவு)', category: 'WHEAT' as ProductCategory, unit: 'kg' as QuantityUnit, price: 48, img: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=500&auto=format&fit=crop&q=80' },
   { name: 'Red Bellary Onion (வெங்காயம்)', category: 'VEGETABLE' as ProductCategory, unit: 'kg' as QuantityUnit, price: 32, img: 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?w=500&auto=format&fit=crop&q=80' },
   { name: 'Green Round Brinjal (கத்தரிக்காய்)', category: 'VEGETABLE' as ProductCategory, unit: 'kg' as QuantityUnit, price: 28, img: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=500&auto=format&fit=crop&q=80' },
   { name: 'Fresh Cavendish Banana (வாழைப்பழம்)', category: 'FRUIT' as ProductCategory, unit: 'bag' as QuantityUnit, price: 420, img: 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=500&auto=format&fit=crop&q=80' },
@@ -196,9 +196,8 @@ export const ListProduceModal: React.FC<ListProduceModalProps> = ({
               >
                 <option value="VEGETABLE">{t.catVegetable}</option>
                 <option value="FRUIT">{t.catFruit}</option>
-                <option value="PADDY">{t.catPaddy}</option>
-                <option value="WHEAT">{t.catWheat}</option>
-                <option value="RICE">{t.catRice}</option>
+                <option value="RICE">Processed Rice ({t.catRice})</option>
+                <option value="WHEAT">Processed Wheat ({t.catWheat})</option>
                 <option value="OTHER">{t.catOther}</option>
               </select>
             </div>
@@ -227,7 +226,7 @@ export const ListProduceModal: React.FC<ListProduceModalProps> = ({
                   Strict Rule: Automatically Assigned to “{t.groceryOnlyBadge}”
                 </strong>
                 <p className="mt-0.5 text-stone-600">
-                  Raw paddy and raw wheat are reserved exclusively for individual grocery customers and cannot be accessed by commercial bulk buyers.
+                  Processed rice and processed wheat are reserved exclusively for individual household grocery customers and cannot be accessed by commercial bulk buyers. Raw paddy and raw wheat are not permitted on this platform.
                 </p>
               </div>
             </div>

@@ -362,7 +362,7 @@ export const SearchEngineModal: React.FC<SearchEngineModalProps> = ({
 
             {[
               { label: language === 'ta' ? '🍅 நாட்டு தக்காளி' : language === 'hi' ? '🍅 देसी टमाटर' : '🍅 Country Tomato', q: 'Country Tomato' },
-              { label: language === 'ta' ? '🌾 பவானி நெல்' : language === 'hi' ? '🌾 भवानी धान' : '🌾 Bhavani Paddy', q: 'Bhavani Paddy' },
+              { label: language === 'ta' ? '🍚 பவானி அரிசி' : language === 'hi' ? '🍚 भवानी चावल' : '🍚 Bhavani Rice', q: 'Bhavani Rice' },
               { label: language === 'ta' ? '🍚 பொன்னி அரிசி' : language === 'hi' ? '🍚 पोन्नी चावल' : '🍚 Ponni Rice', q: 'Ponni Rice' },
               { label: language === 'ta' ? '❄️ சூரிய குளிர் அறை' : language === 'hi' ? '❄️ सोलर कोल्ड रूम' : '❄️ Solar Cold Storage', q: 'Solar Cold' },
               { label: language === 'ta' ? '🌱 இயற்கை சான்று' : language === 'hi' ? '🌱 जैविक फसलें' : '🌱 100% Organic', q: 'Organic' },
@@ -445,9 +445,8 @@ export const SearchEngineModal: React.FC<SearchEngineModalProps> = ({
                     <option value="ALL">All Categories</option>
                     <option value="VEGETABLE">Fresh Vegetables</option>
                     <option value="FRUIT">Fruits</option>
-                    <option value="PADDY">Raw Paddy (Grocery Only)</option>
-                    <option value="RICE">Processed Rice</option>
-                    <option value="WHEAT">Raw Wheat (Grocery Only)</option>
+                    <option value="RICE">Processed Rice (Grocery Only)</option>
+                    <option value="WHEAT">Processed Wheat (Grocery Only)</option>
                   </select>
                 </div>
 
@@ -474,7 +473,7 @@ export const SearchEngineModal: React.FC<SearchEngineModalProps> = ({
                     className="w-full px-2.5 py-1.5 bg-white border border-[#E6E2D3] rounded-xl text-xs text-[#2D3129] font-medium"
                   >
                     <option value="ALL">All Products</option>
-                    <option value="GROCERY_ONLY">Grocery Only (Raw Paddy/Wheat)</option>
+                    <option value="GROCERY_ONLY">Grocery Only (Processed Rice/Wheat)</option>
                     <option value="BULK_ELIGIBLE">Bulk Commercial Eligible</option>
                   </select>
                 </div>
@@ -526,7 +525,7 @@ export const SearchEngineModal: React.FC<SearchEngineModalProps> = ({
             <div className="p-3 bg-[#FDF0EC] border border-[#D97757]/30 rounded-2xl flex items-start gap-2.5 text-xs text-[#D97757]">
               <Info className="w-4 h-4 shrink-0 mt-0.5" />
               <div>
-                <strong>Bulk Procurement Notice:</strong> As per platform policy, Bulk Buyers can procure processed milled rice, fresh vegetables, and fruits. Raw paddy & raw wheat are reserved exclusively for household Grocery buyers.
+                <strong>Bulk Procurement Notice:</strong> As per platform policy, Bulk Buyers can procure wholesale fresh vegetables, fruits, and produce. Processed rice and processed wheat are reserved exclusively for household Grocery buyers, and raw paddy and raw wheat are excluded from this platform.
               </div>
             </div>
           )}
